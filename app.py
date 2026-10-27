@@ -29,7 +29,10 @@ secret_key = os.environ.get("SECRET_KEY")
 if not secret_key:
     raise RuntimeError("Set a strong SECRET_KEY environment variable.")
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder=str(Path(__file__).resolve().parent / "templates")
+)
 app.config.update(
     SECRET_KEY=secret_key,
     SQLALCHEMY_DATABASE_URI=f"sqlite:///{DATA_DIR / 'app.sqlite3'}",
