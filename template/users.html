@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+  <h1>Manage users</h1>
+  <p>{{ users|length }} of 10 accounts used.</p>
+  <p><a href="{{ url_for('new_user') }}">Create a user account</a></p>
+  <ul>
+    {% for user in users %}
+      <li>{{ user.username }}{% if user.is_admin %} — admin{% endif %}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

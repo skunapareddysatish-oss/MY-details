@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Data Collector</title>
+  <style>
+    body { max-width: 800px; margin: 32px auto; padding: 0 16px;
+      font: 16px/1.5 system-ui, sans-serif; color: #202536; background: #f4f6fa; }
+    section, article { background: white; padding: 20px; margin: 16px 0;
+      border: 1px solid #e3e7ef; border-radius: 12px; }
+    input, textarea, button { font: inherit; padding: 10px; margin: 5px 0;
+      width: 100%; box-sizing: border-box; }
+    textarea { min-height: 100px; }
+    button { cursor: pointer; background: #3458d4; color: white; border: 0;
+      border-radius: 7px; }
+    nav { display: flex; gap: 16px; align-items: center; }
+    nav form { margin-left: auto; }
+    nav form button { width: auto; }
+    .flash { background: #fff4ce; padding: 10px; border-radius: 7px; }
+    .muted { color: #626b7b; font-size: 14px; }
+    a { color: #3458d4; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('entries') }}">My Data Collector</a>
+    {% if current_user.is_authenticated %}
+      {% if current_user.is_admin %}<a href="{{ url_for('users') }}">Manage users</a>{% endif %}
+      <span>{{ current_user.username }}</span>
+      <form method="post" action="{{ url_for('logout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit">Log out</button>
+      </form>
+    {% endif %}
+  </nav>
+
+  {% for message in get_flashed_messages() %}
+    <p class="flash">{{ message }}</p>
+  {% endfor %}
+
+  {% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+  <h1>Create user account</h1>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Username</label>
+    <input name="username" required minlength="3" maxlength="32"
+      autocomplete="off">
+    <label>Temporary password</label>
+    <input name="password" type="password" required minlength="12"
+      autocomplete="new-password">
+    <p class="muted">Use a unique password of at least 12 characters. Give it to the user privately.</p>
+    <button type="submit">Create account</button>
+  </form>
+</section>
+{% endblock %}
