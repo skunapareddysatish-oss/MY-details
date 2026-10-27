@@ -31,7 +31,7 @@ if not secret_key:
 
 app = Flask(
     __name__,
-    template_folder=str(Path(__file__).resolve().parent / "templates")
+    template_folder=str(Path(__file__).resolve().parent / "template")
 )
 app.config.update(
     SECRET_KEY=secret_key,
